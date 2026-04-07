@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>網頁跳轉中 | Redirecting...</title>
+    <style>
+        :root {
+            --bg-color: #0b0e14;
+            --text-color: #ffffff;
+            --accent-color: #00d1ff;
+            --glass-bg: rgba(255, 255, 255, 0.05);
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            text-align: center;
+        }
+
+        .container {
+            padding: 2rem;
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            max-width: 90%;
+            width: 400px;
+        }
+
+        h2 {
+            font-weight: 300;
+            margin-bottom: 20px;
+        }
+
+        .timer {
+            font-size: 1.2rem;
+            color: var(--accent-color);
+            margin: 20px 0;
+        }
+
+        .link-box {
+            margin-top: 30px;
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        a {
+            color: var(--accent-color);
+            text-decoration: none;
+            border-bottom: 1px solid transparent;
+            transition: border 0.3s;
+        }
+
+        a:hover {
+            border-bottom: 1px solid var(--accent-color);
+        }
+
+        hr {
+            border: 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>網址更換通知<br>Domain Changed</h2>
+    
+    <p>我們已搬遷至新域名，頁面將在 <span id="countdown" class="timer">5</span> 秒後自動跳轉。</p>
+    <p>We have moved to a new domain. You will be redirected in <span id="countdown-en" class="timer">5</span> seconds.</p>
+
+    <hr>
+
+    <div class="link-box">
+        若瀏覽器沒有自動跳轉，請點擊下方鏈接：<br>
+        If not redirected, please click below:<br>
+        <br>
+        <a id="target-link" href="https://study.thetring.link/">study.thetring.link</a>
+    </div>
+</div>
+
+<script>
+    // 設定目標網址與倒計時秒數
+    const targetUrl = "https://study.thetring.link/";
+    let timeLeft = 5;
+
+    const countdownElement = document.getElementById('countdown');
+    const countdownEnElement = document.getElementById('countdown-en');
+
+    const timer = setInterval(() => {
+        timeLeft--;
+        countdownElement.textContent = timeLeft;
+        countdownEnElement.textContent = timeLeft;
+
+        if (timeLeft <= 0) {
+            clearInterval(timer);
+            window.location.href = targetUrl;
+        }
+    }, 1000);
+</script>
+
+</body>
+</html>
